@@ -61,18 +61,18 @@ char *upscreen(struct fileatr* list, int listsize, int* tab)
 			}
 		}
 		box(tabwnd, 0, 0);
-		box(wsize, 0,0);
+		box(wsize, 0, 0);
 		wrefresh(tabwnd);
 		wrefresh(wname);
 		wrefresh(wsize);
 
 		ch=getch();
-		if (ch=='o'&& *tab==0)
+		if (ch=='\t'&& *tab==0)
 		{
 			*tab=1;
 			return ".";
 		}
-		else if (ch=='o'&& *tab==1)
+		else if (ch=='\t'&& *tab==1)
 		{
 			*tab=0;
 			return".";
@@ -81,7 +81,6 @@ char *upscreen(struct fileatr* list, int listsize, int* tab)
 		if(ch == 'q')
 		{
 			free(list);
-			//ex();
 			exit(1);
 		}
 		getcurrent(&current, listsize, &ch);
@@ -160,7 +159,7 @@ void wintab2()
 	wprintw(wsize, "size\n");
 	wprintw(wname, "name\n");
 	box(tabwnd, 0, 0);
-	box(wsize, 0,0);
+	box(wsize, 0, 0);
 	wrefresh(tabwnd);
 	wrefresh(wname);
 	wrefresh(wsize);
