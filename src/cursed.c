@@ -67,8 +67,17 @@ char *upscreen(struct fileatr* list, int listsize, int* tab)
 		wrefresh(wsize);
 
 		ch=getch();
-		if (ch=='o'&& *tab==0){*tab=1;}
-		if (ch=='o'&& *tab==1){*tab=0;}
+		if (ch=='o'&& *tab==0)
+		{
+			*tab=1;
+			return ".";
+		}
+		else if (ch=='o'&& *tab==1)
+		{
+			*tab=0;
+			return".";
+		}
+
 		if(ch == 'q')
 		{
 			free(list);
@@ -97,12 +106,22 @@ void file_manager()
 
 		int listsize;
 		struct fileatr* list=NULL;
-		if(tab==0) {chdir(path1); wintab1();}
-		if(tab==1) {chdir(path2); wintab2();}
-		list =odir(".", &listsize);
-		chdir(upscreen(list, listsize, &tab));
-		if(tab==0) getcwd(path1, 255);
-		if(tab==1) getcwd(path2, 255);
+		if(tab==0)
+		{
+			chdir(path1);
+			wintab1();
+			list =odir(".", &listsize);
+			chdir(upscreen(list, listsize, &tab));
+			getcwd(path1, 255);
+}
+		if(tab==1)
+		{
+			chdir(path2);
+			wintab2();
+			list =odir(".", &listsize);
+			chdir(upscreen(list, listsize, &tab));
+			getcwd(path2, 255);
+		}
 
 		free(list);
 	}
